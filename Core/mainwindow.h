@@ -81,6 +81,8 @@ private slots:
 
       void on_actionCemuDecrypt_triggered();
 
+      void on_libraryListWidget_itemDoubleClicked(QListWidgetItem *item);
+
       void gameUp(bool pressed);
 
       void gameDown(bool pressed);

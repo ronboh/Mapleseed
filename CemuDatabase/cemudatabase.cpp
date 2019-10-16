@@ -29,9 +29,10 @@ void CemuDatabase::init(QString jsonpath)
         Settings::setValue("cemu/database", jsonpath);
     }
 
-    if (!QFileInfo(jsonpath).exists())
+    auto qfileinfo = QFileInfo(jsonpath);
+    if (!qfileinfo.exists() || qfileinfo.size() == 0)
     {
-        DownloadFile(QUrl("http://pixxy.in/mapleseed/titlekeys.json"), jsonpath);
+        DownloadFile(QUrl("https://pixxy.in/mapleseed/titlekeys.json"), jsonpath);
     }
 
     QFile qfile(jsonpath);
@@ -91,6 +92,7 @@ QString CemuDatabase::XmlValue(const QFileInfo &metaxml, const QString &field)
 
 TitleInfo *CemuDatabase::find(QString id)
 {
+    auto db = instance->database;
     if (instance->database.contains(id.toUpper()))
     {
         return &instance->database[id.toUpper()];
@@ -140,7 +142,7 @@ char *CemuDatabase::DownloadTMD(QString id, QString ver, QString dir)
         return nullptr;
     }
 
-    char* data = new char[static_cast<qulonglong>(tmdfile->size())];
+    char* data = new char[static_cast<unsigned int>(tmdfile->size())];
     tmdfile->read(data, tmdfile->size());
     tmdfile->close();
 
@@ -149,6 +151,9 @@ char *CemuDatabase::DownloadTMD(QString id, QString ver, QString dir)
 
 void CemuDatabase::DownloadFile(QUrl url, QString path)
 {
+    QByteArray bytes;
+    qint64 bytesRead = 0;
+
     QFile file(path);
     if (!file.open(QIODevice::WriteOnly))
     {
@@ -161,7 +166,11 @@ void CemuDatabase::DownloadFile(QUrl url, QString path)
 
     QEventLoop loop;
     QNetworkReply *reply = manager.get(request);
-    connect(reply, &QNetworkReply::readyRead, [&]{ file.write(reply->readAll()); });
+    connect(reply, &QNetworkReply::readyRead, [&]
+    {
+        bytes = reply->readAll();
+        bytesRead = file.write(bytes);
+    });
     connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
     connect(reply, &QNetworkReply::finished, [&]
     {
@@ -173,6 +182,12 @@ void CemuDatabase::DownloadFile(QUrl url, QString path)
         }
     });
     loop.exec();
+
+    if (reply->error() != 0)
+    {
+        qDebug() << reply->errorString();
+        return;
+    }
 
     delete reply;
 }

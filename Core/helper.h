@@ -130,6 +130,7 @@ public:
         if (items.isEmpty())
             return;
 
+        auto display(items.first()->data(Qt::DisplayRole).toString());
         auto id(items.first()->data(Qt::UserRole).toString());
         auto info = findWiiUTitleInfo(id);
 
@@ -162,9 +163,9 @@ public:
     static TitleInfo *findWiiUTitleInfo(QString id)
     {
         TitleInfo *info;
-        if ((info = CemuLibrary::find(id))) {
+        /*if ((info = CemuLibrary::find(id))) {
             return info;
-        }
+        }*/
         if ((info = CemuDatabase::find(id))) {
             return info;
         }

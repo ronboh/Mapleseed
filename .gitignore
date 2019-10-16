@@ -47,3 +47,4 @@ build
 bin
 mapleseed.rc
 /resources/binaries
+/bin-32

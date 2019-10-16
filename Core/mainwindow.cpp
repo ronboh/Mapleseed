@@ -430,6 +430,23 @@ void MainWindow::on_actionCemuDecrypt_triggered()
     });
 }
 
+void MainWindow::on_libraryListWidget_itemDoubleClicked(QListWidgetItem *item)
+{
+    if (Settings::value("cemu/enabled").toBool())
+    {
+        qDebug() << "game start";
+
+        auto id(item->data(Qt::UserRole).toString());
+        auto info = Helper::findWiiUTitleInfo(id);
+
+        if (info)
+        {
+            auto rpx = info->Rpx();
+            executeCemu(rpx);
+        }
+    }
+}
+
 void MainWindow::gameUp(bool pressed)
 {
     if (!pressed || processActive()) return;
@@ -503,16 +520,8 @@ void MainWindow::gameDown(bool pressed)
 void MainWindow::gameStart(bool pressed)
 {
     if (!pressed || processActive()) return;
-    qDebug() << "game start";
-
     auto item = ui->libraryListWidget->selectedItems().first();
-    auto id(item->data(Qt::UserRole).toString());
-    auto info = Helper::findWiiUTitleInfo(id);
-
-    if (info)
-    {
-        executeCemu(info->Rpx());
-    }
+    on_libraryListWidget_itemDoubleClicked(item);
 }
 
 void MainWindow::gameClose(bool pressed)

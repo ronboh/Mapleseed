@@ -46,9 +46,11 @@ void CemuLibrary::init(QString directory)
 
 TitleInfo *CemuLibrary::find(QString id)
 {
+    auto lib = instance->library;
     if (instance->library.contains(id.toUpper()))
     {
-        return instance->library[id.toUpper()];
+        auto info = instance->library.value(id.toUpper());
+        return info;
     }
     return nullptr;
 }

@@ -49,10 +49,15 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-unix|win32: LIBS += -LC:/OpenSSL-v111-Win64/lib/ -llibcrypto
-
-INCLUDEPATH += C:/OpenSSL-v111-Win64/include
-DEPENDPATH += C:/OpenSSL-v111-Win64/include
+contains(QT_ARCH, x86_64) {
+unix|win32: LIBS += -L$$PWD/../../Libraries/Qt/Tools/OpenSSL/Win_x64/lib/ -llibcrypto
+INCLUDEPATH += $$PWD/../../Libraries/Qt/Tools/OpenSSL/Win_x64/include
+DEPENDPATH += $$PWD/../../Libraries/Qt/Tools/OpenSSL/Win_x64/include
+} else {
+unix|win32: LIBS += -L$$PWD/../../Libraries/Qt/Tools/OpenSSL/Win_x86/lib/ -llibcrypto
+INCLUDEPATH += $$PWD/../../Libraries/Qt/Tools/OpenSSL/Win_x86/include
+DEPENDPATH += $$PWD/../../Libraries/Qt/Tools/OpenSSL/Win_x86/include
+}
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../CemuDatabase/release/ -lCemuDatabase
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../CemuDatabase/debug/ -lCemuDatabase

@@ -58,6 +58,11 @@ void MainWindow::setupConnections()
 void MainWindow::downloadCemuId(QString id, QString ver)
 {
     auto qinfo = Helper::GetWiiuDownloadInfo(id, ver);
+    if (!qinfo) {
+        qCritical() << "WiiU title download failed, could not find title info.";
+        return;
+    }
+
     auto key = qinfo->userData.toString();
     auto crypto = CemuCrypto::initialize(key, qinfo->directory);
 

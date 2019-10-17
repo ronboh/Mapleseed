@@ -77,7 +77,7 @@ QString CemuLibrary::XmlValue(const QFileInfo &metaxml, const QString &field)
     }
     return value.toUpper();
 }
-
+#include "cemu/database.h"
 QVariant CemuLibrary::processItem(const QString &d)
 {
     auto self = CemuLibrary::instance;

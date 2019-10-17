@@ -57,9 +57,10 @@ void MainWindow::setupConnections()
 
 void MainWindow::downloadCemuId(QString id, QString ver)
 {
-    auto tinfo = Helper::findWiiUTitleInfo(id);
     auto qinfo = Helper::GetWiiuDownloadInfo(id, ver);
-    auto crypto = CemuCrypto::initialize(tinfo->key(), qinfo->directory);
+    auto key = qinfo->userData.toString();
+    auto crypto = CemuCrypto::initialize(key, qinfo->directory);
+
     auto watcher = new QFutureWatcher<void>;
     auto row = qinfo->userData.toInt();
 
@@ -292,8 +293,7 @@ void MainWindow::NewLibraryEntry(QString xmlfile)
         item->setData(Qt::DisplayRole, info->formatName());
         item->setData(Qt::UserRole, info->id());
         ui->libraryListWidget->addItem(item);
-
-        CemuLibrary::instance->library[info->id()] = std::move(info);
+        CemuLibrary::instance->library[info->id()] = info;
     }
 }
 

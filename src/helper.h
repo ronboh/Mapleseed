@@ -145,7 +145,7 @@ public:
 
     static QString fomartSize(float size)
     {
-        float num = size;
+        double num = static_cast<double>(size);
         QStringList list;
         list << "KB" << "MB" << "GB" << "TB";
 
@@ -163,9 +163,6 @@ public:
     static TitleInfo *findWiiUTitleInfo(QString id)
     {
         TitleInfo *info;
-        /*if ((info = CemuLibrary::find(id))) {
-            return info;
-        }*/
         if ((info = CemuDatabase::find(id))) {
             return info;
         }
@@ -202,6 +199,7 @@ public:
             return nullptr;
 
         auto qinfo = new QueueInfo;
+        qinfo->userData = info->key();
         qinfo->name = info->formatName();
         qinfo->directory = directory;
         qinfo->totalSize = 0;

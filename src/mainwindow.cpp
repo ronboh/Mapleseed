@@ -281,7 +281,7 @@ void MainWindow::NewDatabaseEntry(TitleInfo *info)
 void MainWindow::NewLibraryEntry(QString xmlfile)
 {
     TitleInfo* info;
-    if ((info = CemuDatabase::Create(xmlfile))) {
+    if (!(info = CemuDatabase::Create(xmlfile))) {
         qDebug() << "NewLibraryEntry: XML File could not be parsed." << xmlfile;
         return;
     }

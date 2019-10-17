@@ -2,7 +2,7 @@
 #define QUEUEINFO_H
 
 #include "network_global.h"
-class NETWORKSHARED_EXPORT QueueInfo : public QObject
+class QueueInfo : public QObject
 {
     Q_OBJECT
 public:

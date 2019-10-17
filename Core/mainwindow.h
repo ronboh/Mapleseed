@@ -8,9 +8,9 @@
 #include <QFileDialog>
 #include <QListWidget>
 #include "gamepad.h"
-#include "cemudatabase.h"
-#include "cemulibrary.h"
-#include "queueinfo.h"
+#include "cemu/database.h"
+#include "cemu/library.h"
+#include "network/queueinfo.h"
 
 namespace Ui {
 class MainWindow;

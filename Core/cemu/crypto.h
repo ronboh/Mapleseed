@@ -1,8 +1,18 @@
 #ifndef CEMUCRYPTO_H
 #define CEMUCRYPTO_H
 
-#include "cemucrypto_global.h"
-class CEMUCRYPTOSHARED_EXPORT CemuCrypto : public QObject
+#include <QtCore/qglobal.h>
+#include <QObject>
+#include <QMessageBox>
+#include <QtConcurrent>
+#include <QDir>
+#include <QFile>
+#include <QDataStream>
+
+#include <openssl\aes.h>
+#include <openssl\sha.h>
+
+class CemuCrypto : public QObject
 {
 #pragma pack(push, 1)
 

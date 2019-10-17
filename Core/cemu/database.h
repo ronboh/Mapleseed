@@ -1,8 +1,22 @@
 #ifndef CEMUDATABASE_H
 #define CEMUDATABASE_H
 
-#include "cemudb_global.h"
-class CEMUDBSHARED_EXPORT CemuDatabase : public QObject
+#include <QtCore/qglobal.h>
+#include <QObject>
+#include <QtDebug>
+#include <QBuffer>
+#include <QMutex>
+#include <QFileInfo>
+#include <QtXml>
+#include <QtConcurrent>
+#include <QMap>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+
+#include "../titleinfo.h"
+#include "../settings.h"
+
+class CemuDatabase : public QObject
 {
     Q_OBJECT
 public:

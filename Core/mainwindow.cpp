@@ -280,7 +280,11 @@ void MainWindow::NewDatabaseEntry(TitleInfo *info)
 
 void MainWindow::NewLibraryEntry(QString xmlfile)
 {
-    auto info = CemuDatabase::Create(xmlfile);
+    TitleInfo* info;
+    if ((info = CemuDatabase::Create(xmlfile))) {
+        qDebug() << "NewLibraryEntry: XML File could not be parsed." << xmlfile;
+        return;
+    }
 
     if (info->titleType() == TitleType::Game)
     {

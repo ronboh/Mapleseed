@@ -27,19 +27,32 @@ DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs depr
 CONFIG += c++11
 
 SOURCES += \
+        cemu/QtCompressor.cpp \
+        cemu/crypto.cpp \
+        cemu/database.cpp \
+        cemu/library.cpp \
         gamepad.cpp \
         helper.cpp \
         logging.cpp \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        network/downloadqueue.cpp \
+        network/queueinfo.cpp
 
 HEADERS += \
+    cemu/QtCompressor.h \
+    cemu/crypto.h \
+    cemu/database.h \
+    cemu/library.h \
         gamepad.h \
         helper.h \
         logging.h \
         mainwindow.h \
         settings.h \
-        titleinfo.h
+        titleinfo.h \
+        network/downloadqueue.h \
+        network/network_global.h \
+        network/queueinfo.h \
 
 FORMS += \
         mainwindow.ui
@@ -58,31 +71,3 @@ unix|win32: LIBS += -L$$PWD/../../Libraries/Qt/Tools/OpenSSL/Win_x86/lib/ -llibc
 INCLUDEPATH += $$PWD/../../Libraries/Qt/Tools/OpenSSL/Win_x86/include
 DEPENDPATH += $$PWD/../../Libraries/Qt/Tools/OpenSSL/Win_x86/include
 }
-
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../CemuDatabase/release/ -lCemuDatabase
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../CemuDatabase/debug/ -lCemuDatabase
-else:unix: LIBS += -L$$OUT_PWD/../CemuDatabase/ -lCemuDatabase
-
-INCLUDEPATH += $$PWD/../CemuDatabase
-DEPENDPATH += $$PWD/../CemuDatabase
-
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../CemuLibrary/release/ -lCemuLibrary
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../CemuLibrary/debug/ -lCemuLibrary
-else:unix: LIBS += -L$$OUT_PWD/../CemuLibrary/ -lCemuLibrary
-
-INCLUDEPATH += $$PWD/../CemuLibrary
-DEPENDPATH += $$PWD/../CemuLibrary
-
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Network/release/ -lNetwork
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Network/debug/ -lNetwork
-else:unix: LIBS += -L$$OUT_PWD/../Network/ -lNetwork
-
-INCLUDEPATH += $$PWD/../Network
-DEPENDPATH += $$PWD/../Network
-
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../CemuCrypto/release/ -lCemuCrypto
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../CemuCrypto/debug/ -lCemuCrypto
-else:unix: LIBS += -L$$OUT_PWD/../CemuCrypto/ -lCemuCrypto
-
-INCLUDEPATH += $$PWD/../CemuCrypto
-DEPENDPATH += $$PWD/../CemuCrypto

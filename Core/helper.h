@@ -9,11 +9,11 @@
 #include <QApplication>
 #include <QClipboard>
 #include "settings.h"
-#include "downloadqueue.h"
-#include "cemulibrary.h"
-#include "cemudatabase.h"
-#include "cemucrypto.h"
-#include "QtCompressor.h"
+#include "network/downloadqueue.h"
+#include "cemu/library.h"
+#include "cemu/database.h"
+#include "cemu/crypto.h"
+#include "cemu/QtCompressor.h"
 
 class Helper
 {

@@ -1,4 +1,4 @@
-#include "cemulibrary.h"
+#include "library.h"
 
 CemuLibrary *CemuLibrary::instance = new CemuLibrary;
 

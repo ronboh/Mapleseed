@@ -1,4 +1,4 @@
-#include "cemudatabase.h"
+#include "cemu/database.h"
 
 CemuDatabase *CemuDatabase::instance = new CemuDatabase;
 

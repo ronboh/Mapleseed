@@ -1,8 +1,20 @@
 #ifndef CEMULIBRARY_H
 #define CEMULIBRARY_H
 
-#include "cemulibrary_global.h"
-class CEMULIBRARYSHARED_EXPORT CemuLibrary : public QObject
+#include <QtCore/qglobal.h>
+#include <QObject>
+#include <QtDebug>
+#include <QBuffer>
+#include <QMutex>
+#include <QFileInfo>
+#include <QtXml>
+#include <QtConcurrent>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include "../titleinfo.h"
+#include "../settings.h"
+
+class CemuLibrary : public QObject
 {
     Q_OBJECT
 public:

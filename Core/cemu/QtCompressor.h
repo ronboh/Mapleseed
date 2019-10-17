@@ -1,8 +1,15 @@
 #ifndef QTCOMPRESSOR_H
 #define QTCOMPRESSOR_H
 
-#include "cemucrypto_global.h"
-class CEMUCRYPTOSHARED_EXPORT QtCompressor : public QObject
+#include <QtCore/qglobal.h>
+#include <QObject>
+#include <QMessageBox>
+#include <QtConcurrent>
+#include <QDir>
+#include <QFile>
+#include <QDataStream>
+
+class QtCompressor : public QObject
 {
     Q_OBJECT
 public:

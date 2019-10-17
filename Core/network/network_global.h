@@ -17,10 +17,4 @@
 #include <QUrl>
 #include <QEventLoop>
 
-#if defined(NETWORK_LIBRARY)
-#  define NETWORKSHARED_EXPORT Q_DECL_EXPORT
-#else
-#  define NETWORKSHARED_EXPORT Q_DECL_IMPORT
-#endif
-
 #endif // NETWORK_GLOBAL_H

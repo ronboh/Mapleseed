@@ -72,16 +72,13 @@ void Logging::messageOutput(QtMsgType type, const QMessageLogContext &context, c
         qtype = "Fatal";
         break;
     }
-#ifdef QT_DEBUG
     emit instance->OnLogEvent(QString("%1: %2 (%3:%4, %5)")
                                 .arg(qtype)
                                 .arg(localMsg.constData())
                                 .arg(file)
                                 .arg(context.line)
-                                .arg(function));
-#else
-    emit instance->OnLogEvent(QString("%1: %2").arg(qtype).arg(localMsg.constData()));
-#endif
+                                .arg(function)
+                              );
 }
 
 void Logging::logEvent(QString msg)

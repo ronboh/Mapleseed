@@ -3,7 +3,7 @@
 
 #include "queueinfo.h"
 #include "network_global.h"
-class NETWORKSHARED_EXPORT DownloadQueue : public QObject
+class DownloadQueue : public QObject
 {
     Q_OBJECT
 public:

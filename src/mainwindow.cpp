@@ -17,7 +17,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::initialize()
 {
-    setWindowTitle("MapleSeed++ v1.1.0");
+    setWindowTitle("MapleSeed++ v1.1.1");
     Settings settings;
 
     connect(Logging::instance, &Logging::OnLogEvent, this, &MainWindow::logEvent);

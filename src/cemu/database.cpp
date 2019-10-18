@@ -130,7 +130,8 @@ char *CemuDatabase::DownloadTMD(QString id, QString ver, QString dir)
     }
 
     QByteArray buffer;
-    if (!QFile(tmdpath).exists())
+    auto qfileInfo = QFileInfo(tmdpath);
+    if (!qfileInfo.exists() || qfileInfo.size() == 0)
     {
         DownloadFile(tmdurl, tmdpath);
     }
